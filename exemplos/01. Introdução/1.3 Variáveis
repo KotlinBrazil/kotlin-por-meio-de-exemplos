@@ -1,13 +1,13 @@
 # Variáveis
 
-Kotlin apresenta um sistema de inferência de tipos. Enquanto você pode declarar explicitamente o tipo de uma
-variável, você também pode deixar o compilador ter o trabalho de inferir o tipo. Kotlin não obriga
-imutabilidade, mas ainda é recomendado.
-No geral, use *val* invés de *var*.
+Kotlin tem um poderoso sistema de inferência de tipos. Embora você possa declarar o tipo de uma
+variável explicitamente, é preferível que você deixe o compilador fazer o trabalho de inferir os tipos.
+Kotlin não obriga que as variáveis sejam imutáveis, ainda que seja recomendado.
+Em suma, use *val* ao invés de *var*.
 
-```run-kotlin
+```kt
 fun main() {
-    var a: String = "initial"    // 1
+    var a: String = "inicial"    // 1
     println(a)
 
     val b: Int = 1               // 2
@@ -19,24 +19,25 @@ fun main() {
 2. Declara uma variável imutável e a inicializa.
 3. Declara uma variável imutável e a inicializa sem especificar seu tipo. O compilador infere o tipo `Int`.
 
-```run-kotlin
+```kt
 fun main() {
     var e: Int   // 1
     println(e)   // 2
 }
 ```
 
-1. Declara uma variável sem inicializar.
-2. Tentar utilizar a variável causará um erro: 'Variable 'e' must be initialized'(Variável 'e' deve ser
-inicializada)
+1. Declara uma variável sem a inicializar.
+2. Uma tentativa de usar a variável causará um erro de compilação: `Variable 'e' must be initialized` (`A variável 'e' deve ser inicializada.`)
 
-```run-kotlin
-fun algumaCondicao() = true
+Você tem toda liberdade para escolher quando inicializará uma variável; entretanto, é necessário que esta seja inicializada antes de seu primeiro uso.
+
+```kt
+fun someCondition() = true
 
 fun main() {
     val d: Int          // 1
 
-    if(algumaCondicao()) {
+    if (someCondition()) {
         d = 1           // 2
     } else {
         d = 2           // 2
@@ -46,6 +47,6 @@ fun main() {
 }
 ```
 
-1. Declara uma variável sem inicializar.
-2. Inicializa a variável com diferentes valores em uma certa condição.
-3. Ler a variável é possível pois ela já foi inicializada.
+1. Declara uma variável sem a inicializar.
+2. Inicializa a variável com diferentes valores conforme dada condição.
+3. Torna-se possível ler a variável pois esta já foi inicializada.
