@@ -1,0 +1,51 @@
+# Variáveis
+
+Kotlin apresenta um sistema de inferência de tipos. Enquanto você pode declarar explicitamente o tipo de uma
+variável, você também pode deixar o compilador ter o trabalho de inferir o tipo. Kotlin não obriga
+imutabilidade, mas ainda é recomendado.
+No geral, use *val* invés de *var*.
+
+```run-kotlin
+fun main() {
+    var a: String = "initial"    // 1
+    println(a)
+
+    val b: Int = 1               // 2
+    val c = 3                    // 3
+}
+```
+
+1. Declara uma variável mutável e a inicializa.
+2. Declara uma variável imutável e a inicializa.
+3. Declara uma variável imutável e a inicializa sem especificar seu tipo. O compilador infere o tipo `Int`.
+
+```run-kotlin
+fun main() {
+    var e: Int   // 1
+    println(e)   // 2
+}
+```
+
+1. Declara uma variável sem inicializar.
+2. Tentar utilizar a variável causará um erro: 'Variable 'e' must be initialized'(Variável 'e' deve ser
+inicializada)
+
+```run-kotlin
+fun algumaCondicao() = true
+
+fun main() {
+    val d: Int          // 1
+
+    if(algumaCondicao()) {
+        d = 1           // 2
+    } else {
+        d = 2           // 2
+    }
+
+    println(d)          // 3
+}
+```
+
+1. Declara uma variável sem inicializar.
+2. Inicializa a variável com diferentes valores em uma certa condição.
+3. Ler a variável é possível pois ela já foi inicializada.
