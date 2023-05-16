@@ -1,0 +1,66 @@
+# When
+
+Invés de usar a comum declaração switch, Kotlin utiliza o mais flexível e limpo construtor when. Ele pode ser usado tanto como expressão tanto como uma declaração.
+
+## Declaração When
+
+```run-kotlin
+fun main() {
+    casos("Olá")
+    casos(1)
+    casos(0L)
+    casos(MinhaClasse())
+    casos("oi")
+}
+
+fun casos(obj: Any) {                                
+    when (obj) {                                      // 1   
+        1 -> println("Um")                            // 2
+        "Olá" -> println("Saudação")                  // 3
+        is Long -> println("Longo")                   // 4
+        !is String -> println("Não é uma String")     // 5
+        else -> println("Desconhecido")               // 6
+    }   
+}
+
+class MinhaClasse
+```
+
+1. Isso é uma declaração `when`.
+2. Confere se o `obj` é iguail à 1.
+3. Confere se o `obj` é igual à "Olá".
+4. Executa uma checagem de tipo.
+5. Executa uma checagem de tipo inversa.
+6. Declaração padrão (pode ser omitida).
+
+Perceba que todas as outras condições são checadas sequencialmente até que uma delas seja satifeita. Então, apenas o primeiro caso bem-sucedido será executado.
+
+## Expresão When
+
+```run-kotlin
+fun main() {
+    println(quandoDefinido("Olá"))
+    println(quandoDefinido(3.4))
+    println(quandoDefinido(1))
+    println(quandoDefinido(MinhaClasse()))
+}
+
+fun quandoDefinido(obj: Any): Any {
+    val resultado = when (obj) {              // 1
+        1 -> "um"                             // 2
+        "Olá" -> 1                            // 3
+        is Long -> false                      // 4
+        else -> 42                            // 5
+    }
+    
+    return resultado
+}
+
+class MinhaClasse
+```
+
+1. Essa é uma expressão `when`.
+2. Define o valor para `"um"` se o `obj` for igual à 1.
+3. Define o valor para um se o `obj` for igual à "Olá".
+4. Define o valor para `false` se o `obj` é uma instância de `Long`.
+5. Define o valor para `42` se nenhuma das condições anteriores forem satisfeitas. Diferente da declaração `when`, o caso padrão é geralmente obrigatório, exceto quando o compilador poder checar que os outros casos cobrem todos os casos possíveis.
